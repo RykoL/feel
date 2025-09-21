@@ -1,0 +1,111 @@
+:root {
+    --color-yellow: #f6c445;
+    --color-red: #e45f2b;
+    --color-green: #a0e548;
+    --color-blue: #9ac1f0;
+
+    --color-black: #000;
+    --color-shadow: rgba(0, 0, 0, 0.25);
+    --color-border: rgba(0, 0, 0, 0.25);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* --- Layout --- */
+.grid-12 {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+}
+
+.grid-gap {
+    row-gap: 2rem;
+}
+
+.mood-button-container {
+    grid-column: 4 / 10;
+    display: flex;
+    flex-direction: column;
+    grid-row: 2;
+    gap: 2rem;
+}
+
+#main-heading {
+    text-align: center;
+    font-size: 5rem;
+    margin: 0;
+}
+
+.feeling-section {
+    grid-row: 3;
+    min-height: 100vh;
+    grid-column: 1 / 13;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- Base Styles --- */
+body {
+    font-family: Inter, sans-serif;
+}
+
+/* --- Components --- */
+
+.heading-secondary {
+    text-align: center;
+    font-size: 5rem;
+}
+
+.text-input {
+    width: 80%;
+    height: 50%;
+    margin: 0 auto;
+}
+
+.mood-button {
+    display: block;
+    min-height: 28rem;
+    min-width: 28rem;
+    border: 1px solid var(--color-border);
+    border-radius: 1rem;
+    padding: 2rem;
+    color: var(--color-black);
+    text-decoration: none;
+    text-align: center;
+    font-size: 8rem;
+    box-shadow: .25rem .25rem 1rem var(--color-shadow);
+    align-content: center;
+    transition: transform .25s;
+    background-color: var(--btn-color);
+
+    &:active {
+        translate: 0 .2rem;
+        background-color: color-mix(in oklab, var(--btn-color), var(--color-black) 7%);
+    }
+
+    &:hover {
+        background-color: color-mix(in oklab, var(--btn-color), var(--color-black) 7%);
+    }
+}
+
+.mood-button-icon {
+    display: block;
+}
+
+/* --- Modifier Classes --- */
+.mood-button-green {
+    --btn-color: var(--color-green);
+}
+
+.mood-button-red {
+    --btn-color: var(--color-red);
+}
+
+.mood-button-yellow {
+    --btn-color: var(--color-yellow);
+}
+
+.mood-button-blue {
+    --btn-color: var(--color-blue);
+}

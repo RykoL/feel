@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>How do you feel?</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <link rel="stylesheet" href="main.css" type="text/css" media="screen" />
+  </head>
+  <body x-data="{ feeling: 'good'}">
+      <header id="main-heading">
+        <h1>How do you feel today?</h1>
+      </header>
+      <main class="grid-12 grip-gap">
+        <section class="mood-button-container">
+          <a class="mood-button mood-button-green" href="#feeling-good" @click="feeling = 'good'">
+            <span class="mood-button-icon">😊</span>
+            Good
+          </a>
+          <a class="mood-button mood-button-blue" href="#normal" @click="feeling = 'normal'">
+            <span class="mood-button-icon">🙂</span>
+            Normal
+          </a>
+          <a class="mood-button mood-button-yellow" href="#ok"  @click="feeling = 'ok'">
+            <span class="mood-button-icon">😐</span>
+            Ok
+          </a>
+          <a class="mood-button mood-button-red" href="#bad"  @click="feeling = 'bad'">
+            <span class="mood-button-icon">🙁</span>
+            Bad
+          </a>
+          </section>
+          <section class="feeling-section" x-show="feeling === 'good'" id="feeling-good">
+            <h2 class="heading-secondary">Feeling good today ?</h2>
+            <p>Really glad to hear that ! What did you do today that made you feel good ? Can you apply this on other days as well ?</p>
+            <label>
+              Friends
+              <input type="checkbox" name="" value="Friends" />
+            </label>
+            <textarea class="text-input"></textarea>
+          </section>
+          <section class="feeling-section" x-show="feeling === 'normal'">
+            <h2 class="heading-secondary">Perfectly normal day !</h2>
+            <p>Some days are just normal, huhm ? What is missing to make this day an awesome day ?</p>
+          </section>
+          <section class="feeling-section" x-show="feeling === 'ok'">
+            <h2 class="heading-secondary">Ah dang</h2>
+            <p>Some days are just normal, huhm ? What is missing to make this day an awesome day ?</p>
+          </section>
+          <section class="feeling-section" x-show="feeling === 'bad'">
+            <h2 class="heading-secondary">It's alright !</h2>
+            <p>Some days are just normal, huhm ? What is missing to make this day an awesome day ?</p>
+          </section>
+      </main>
+  </body>
+</html>

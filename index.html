@@ -16,7 +16,7 @@
   </head>
   <body x-data="{ feeling: 'good'}">
       <header id="main-heading">
-        <h1>How do you feel today?</h1>
+        <h1 class="heading heading-primary">How do you feel today?</h1>
       </header>
       <main class="grid-12 grip-gap">
         <section class="mood-button-container">
@@ -38,8 +38,11 @@
           </a>
           </section>
           <section class="feeling-section" x-show="feeling === 'good'" id="feeling-good">
-            <h2 class="heading-secondary">Feeling good today ?</h2>
-            <p>Really glad to hear that ! What did you do today that made you feel good ? Can you apply this on other days as well ?</p>
+            <h2 class="heading heading-secondary">Glad to hear that 🎉</h2>
+            <div class="text-container">
+              <p class="text">What did you do today that made you feel good ? Can you apply this on other days as well ?</p>
+            </div>
+            
             <label>
               Friends
               <input type="checkbox" name="" value="Friends" />

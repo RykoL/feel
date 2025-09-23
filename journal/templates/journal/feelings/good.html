@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
   <head>
     <title>How do you feel?</title>
@@ -12,33 +13,14 @@
       rel="stylesheet"
     />
     <script src="//unpkg.com/alpinejs" defer></script>
-    <link rel="stylesheet" href="main.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="{% static 'journal/css/main.css' %}">
   </head>
   <body x-data="{ feeling: 'good'}">
       <header id="main-heading">
-        <h1 class="heading heading-primary">How do you feel today?</h1>
+        <h1 class="heading heading-secondary">Great 🎉 !</h1>
       </header>
       <main class="grid-12 grip-gap">
-        <section class="mood-button-container">
-          <a class="mood-button mood-button-green" href="#feeling-good" @click="feeling = 'good'">
-            <span class="mood-button-icon">😊</span>
-            Good
-          </a>
-          <a class="mood-button mood-button-blue" href="#normal" @click="feeling = 'normal'">
-            <span class="mood-button-icon">🙂</span>
-            Normal
-          </a>
-          <a class="mood-button mood-button-yellow" href="#ok"  @click="feeling = 'ok'">
-            <span class="mood-button-icon">😐</span>
-            Ok
-          </a>
-          <a class="mood-button mood-button-red" href="#bad"  @click="feeling = 'bad'">
-            <span class="mood-button-icon">🙁</span>
-            Bad
-          </a>
-          </section>
           <section class="feeling-section" x-show="feeling === 'good'" id="feeling-good">
-            <h2 class="heading heading-secondary">Great 🎉 !</h2>
             <div class="text-container">
               <p class="text">What happened today that made you feel good ?</p>
             </div>

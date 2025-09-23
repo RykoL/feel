@@ -4,6 +4,7 @@
     --color-red: #e45f2b;
     --color-green: #a0e548;
     --color-blue: #9ac1f0;
+    --color-primary: #72fa93;
 
     --color-black: #000;
     --color-shadow: rgba(0, 0, 0, 0.25);
@@ -43,6 +44,12 @@ body {
     flex-direction: column;
 }
 
+.feeling-option-selection {
+    margin: 1rem 0;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
 
 
 /* --- Components --- */
@@ -75,6 +82,51 @@ body {
     margin: 0 auto;
     flex-grow: 1;
     box-sizing: border-box;
+}
+
+.checkbox {
+    &:hover {
+        cursor: pointer;
+    }   
+}
+
+.checkbox input{
+    display: none;
+}
+
+.checkbox:has(input:checked) {
+    background-color: var(--color-primary);
+}
+
+.pill {
+    background: #c0c0c0;
+    color: #404040;
+    padding: .25rem .5rem;
+    border-radius: 9999px;
+    font-weight: 400;
+}
+
+.btn {
+    border: none;
+    font-size: 1.125rem;
+    background: var(--btn-bg-color);
+    padding: 1rem;
+    border-radius: 1rem;
+
+    &:active {
+        translate: 0 .2rem;
+        background-color: color-mix(in oklab, var(--btn-bg-color), var(--color-black) 7%);
+    }
+
+    &:hover {
+        cursor: pointer;
+        background-color: color-mix(in oklab, var(--btn-bg-color), var(--color-black) 7%);
+    }
+
+}
+
+.btn-primary {
+    --btn-bg-color: var(--color-primary);
 }
 
 .mood-button {

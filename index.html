@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <script src="//unpkg.com/alpinejs" defer></script>
@@ -40,19 +40,39 @@
           <section class="feeling-section" x-show="feeling === 'good'" id="feeling-good">
             <h2 class="heading heading-secondary">Great 🎉 !</h2>
             <div class="text-container">
-              <p class="text">What did you do today that made you feel good ?</p>
-              <p class="text">Can you apply this on other days as well ?</p>
+              <p class="text">What happened today that made you feel good ?</p>
             </div>
-            <div>
-              <p>The Weather</p>
-              <p>An Event</p>
-              <p>Meeting Friends / Family</p>
-              <p>I achieved something today</p>
-              <p>Sports</p>
-              <p>Pursuing a hobby</p>
-              <p>I don't know</p>
+            <div class="feeling-option-selection">
+              <label class="pill checkbox">
+                <input type="checkbox" name="" value="" />
+                The Weather
+              </label>
+              <label class="pill checkbox">
+                <input type="checkbox" name="" value="" />
+                An event
+              </label>
+              <label class="pill checkbox">
+                <input type="checkbox" name="" value="" />
+                Meeting Friends / Family
+              </label>
+              <label class="pill checkbox">
+                <input type="checkbox" name="" value="" />
+                Achieved something
+              </label>
+              <label class="pill checkbox">
+                <input type="checkbox" name="" value="" />
+                Sports
+              </label>
+              <label class="pill checkbox">
+                <input type="checkbox" name="" value="" />
+                Pursuing a hobby
+              </label>
+              <label class="pill checkbox">
+                <input type="checkbox" name="" value="" />
+                I achived something
+              </label>
             </div>
-            <button>Save</button>
+            <button class="btn btn-primary">Save</button>
           </section>
           <section class="feeling-section" x-show="feeling === 'normal'">
             <h2 class="heading-secondary">Perfectly normal day !</h2>

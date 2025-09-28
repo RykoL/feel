@@ -17,44 +17,47 @@
   </head>
   <body x-data="{ feeling: 'good'}">
       <header id="main-heading">
-        <h1 class="heading heading-secondary">Great 🎉 !</h1>
+        <h1 class="heading heading-secondary    ">Great 🎉 !</h1>
       </header>
       <main class="grid-12 grip-gap">
           <section class="feeling-section" x-show="feeling === 'good'" id="feeling-good">
             <div class="text-container">
               <p class="text">What happened today that made you feel good ?</p>
             </div>
-            <div class="feeling-option-selection">
-              <label class="pill checkbox">
-                <input type="checkbox" name="" value="" />
-                The Weather
-              </label>
-              <label class="pill checkbox">
-                <input type="checkbox" name="" value="" />
-                An event
-              </label>
-              <label class="pill checkbox">
-                <input type="checkbox" name="" value="" />
-                Meeting Friends / Family
-              </label>
-              <label class="pill checkbox">
-                <input type="checkbox" name="" value="" />
-                Achieved something
-              </label>
-              <label class="pill checkbox">
-                <input type="checkbox" name="" value="" />
-                Sports
-              </label>
-              <label class="pill checkbox">
-                <input type="checkbox" name="" value="" />
-                Pursuing a hobby
-              </label>
-              <label class="pill checkbox">
-                <input type="checkbox" name="" value="" />
-                I achived something
-              </label>
-            </div>
-            <button class="btn btn-primary">Save</button>
+            <form method="POST" action="/journal/save">
+              {% csrf_token %}
+              <div class="feeling-option-selection">
+                <label class="pill checkbox">
+                  <input type="checkbox" name="" value="" />
+                  The Weather
+                </label>
+                <label class="pill checkbox">
+                  <input type="checkbox" name="" value="" />
+                  An event
+                </label>
+                <label class="pill checkbox">
+                  <input type="checkbox" name="" value="" />
+                  Meeting Friends / Family
+                </label>
+                <label class="pill checkbox">
+                  <input type="checkbox" name="" value="" />
+                  Achieved something
+                </label>
+                <label class="pill checkbox">
+                  <input type="checkbox" name="" value="" />
+                  Sports
+                </label>
+                <label class="pill checkbox">
+                  <input type="checkbox" name="" value="" />
+                  Pursuing a hobby
+                </label>
+                <label class="pill checkbox">
+                  <input type="checkbox" name="" value="" />
+                  I achived something
+                </label>
+              </div>
+              <button type="submit" class="btn btn-primary">Save</button>
+            </form>
           </section>
           <section class="feeling-section" x-show="feeling === 'normal'">
             <h2 class="heading-secondary">Perfectly normal day !</h2>

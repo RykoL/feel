@@ -1,43 +1,5 @@
-<!DOCTYPE html>
-{% load static %}
-<html lang="en">
-  <head>
-    <title>How do you feel?</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <script src="//unpkg.com/alpinejs" defer></script>
-    <link rel="stylesheet" href="{% static 'journal/css/main.css' %}">
-  </head>
-  <body x-data="{ feeling: 'good'}">
-      <header id="main-heading">
-        <h1 class="heading heading-primary">How do you feel today?</h1>
-      </header>
-      <main class="grid-12 grip-gap">
-        <section class="mood-button-container">
-          <a class="mood-button mood-button-green" href="feelings/good" @click="feeling = 'good'">
-            <span class="mood-button-icon">😊</span>
-            Good
-          </a>
-          <a class="mood-button mood-button-blue" href="#normal" @click="feeling = 'normal'">
-            <span class="mood-button-icon">🙂</span>
-            Normal
-          </a>
-          <a class="mood-button mood-button-yellow" href="#ok"  @click="feeling = 'ok'">
-            <span class="mood-button-icon">😐</span>
-            Ok
-          </a>
-          <a class="mood-button mood-button-red" href="#bad"  @click="feeling = 'bad'">
-            <span class="mood-button-icon">🙁</span>
-            Bad
-          </a>
-          </section>
-      </main>
-  </body>
-</html>
+<ul>
+  {% for entry in entries %}
+  <li>{{entry.feeling}}</li>
+  {% endfor %}
+</ul>

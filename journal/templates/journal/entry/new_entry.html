@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <title>How do you feel?</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="{%static 'js/htmx.min.js' %}" defer>
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <link rel="stylesheet" href="{% static 'journal/css/main.css' %}">
+  </head>
+  <body>
+      <header id="main-heading">
+        <h1 class="heading heading-primary">How do you feel today?</h1>
+      </header>
+      <main class="grid-12 grip-gap">
+        <form method="POST" action="" class="mood-button-container">
+          {% csrf_token %}
+          <button class="mood-button mood-button-green" value="good" name="feeling">
+            <span class="mood-button-icon">😊</span>
+            Good
+          </button>
+
+          <button class="mood-button mood-button-blue" value="normal" name="feeling">
+            <span class="mood-button-icon">🙂</span>
+            Normal
+          </button>
+          <button class="mood-button mood-button-yellow" name="feeling" value="ok">
+            <span class="mood-button-icon">😐</span>
+            Ok
+          </button>
+          <button class="mood-button mood-button-red" name="feeling" value="bad">
+            <span class="mood-button-icon">🙁</span>
+            Bad
+          </button>
+          </form>
+      </main>
+  </body>
+</html>

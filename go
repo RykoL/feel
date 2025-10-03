@@ -11,6 +11,10 @@ function task_test () {
   $UV_RUN pytest
 }
 
+function task_format() {
+  $UV_RUN ruff format
+}
+
 function task_manage() {
   $UV_RUN ./manage.py $@
 }
@@ -21,6 +25,8 @@ function help () {
     echo "Available tasks are:"
     echo "run - run the server in development mode"
     echo "test - runs pytest against the application"
+    echo "manage - simple wrapper around ./manage.py"
+    echo "format - Format the project using ruff"
 }
 
 if [[ $# -lt 1 ]]; then

@@ -6,5 +6,5 @@ class NewJournalEntryForm(forms.ModelForm):
     class Meta:
         model = JournalEntry
         fields = [
-            'feeling'
+
         ]

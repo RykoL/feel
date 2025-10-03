@@ -23,6 +23,8 @@
       <main class="grid-12 grip-gap">
         <form method="POST" action="" class="mood-button-container">
           {% csrf_token %}
+          <input type="hidden" value="{{journal_id}}" name="journal_id">
+
           <button class="mood-button mood-button-green" value="good" name="feeling">
             <span class="mood-button-icon">😊</span>
             Good

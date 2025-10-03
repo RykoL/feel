@@ -9,11 +9,11 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
-raise Exception('asdasd')
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -94,8 +94,8 @@ AUTHENTICATION_BACKENDS = [
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
         'APP': {
-            'client_id': '***REMOVED***',
-            'secret': '***REMOVED***',
+            'client_id': os.getenv("GOOGLE_SOCIAL_AUTH_CLIENT_ID"),
+            'secret': os.getenv("GOOGLE_SOCIAL_AUTH_CLIENT_SECRET"),
             'key': ''
         },
         'SCOPE': [

@@ -6,7 +6,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -15,34 +14,86 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Journal',
+            name="Journal",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "author",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='JournalEntry',
+            name="JournalEntry",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('journal', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='journal.journal')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                (
+                    "journal",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="journal.journal",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Observation',
+            name="Observation",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('feeling', models.TextField(choices=[('good', 'Good'), ('normal', 'Normal'), ('ok', 'Ok'), ('bad', 'Bad')])),
-                ('journal_entry', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='journal.journalentry')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "feeling",
+                    models.TextField(
+                        choices=[
+                            ("good", "Good"),
+                            ("normal", "Normal"),
+                            ("ok", "Ok"),
+                            ("bad", "Bad"),
+                        ]
+                    ),
+                ),
+                (
+                    "journal_entry",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="journal.journalentry",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Trigger',
+            name="Trigger",
             fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False)),
-                ('name', models.CharField(max_length=50)),
-                ('observation', models.ManyToManyField(to='journal.observation')),
+                ("id", models.AutoField(primary_key=True, serialize=False)),
+                ("name", models.CharField(max_length=50)),
+                ("observation", models.ManyToManyField(to="journal.observation")),
             ],
         ),
     ]

@@ -5,24 +5,20 @@ from django.contrib.auth.decorators import login_required
 from .forms import NewJournalEntryForm
 from .models import Journal, JournalEntry
 
+
 # Create your views here.
 def journal(request):
     journal = Journal.objects.get_or_create(author=request.user)
-    context = {
-        'entries': [],
-        'username': request.user.first_name
-    }
+    context = {"entries": [], "username": request.user.first_name}
     return render(request, "journal/index.html", context)
 
 
 def new_entry(request):
     journal, _ = Journal.objects.get_or_create(author=request.user)
 
-    context = {
-        'journal_id': journal.pk
-    }
+    context = {"journal_id": journal.pk}
 
-    if request.method == 'POST':
+    if request.method == "POST":
         form = NewJournalEntryForm(request.POST)
         if form.is_valid():
             journal_entry = form.save()

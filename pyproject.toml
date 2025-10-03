@@ -17,4 +17,4 @@ dev = [
 ]
 
 [tool.pytest.ini_options]
-DJANGO_SETTINGS_MODULE = "feel.settings.base"
+DJANGO_SETTINGS_MODULE = "feel.settings.test"

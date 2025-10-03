@@ -4,7 +4,7 @@ UV_RUN="uv run"
 
 function task_run () {
   [ ! -f local.env ] || export $(grep -v '^#' local.env | xargs)
-  $UV_RUN ./manage.py runserver --settings feel.settings.base
+  $UV_RUN ./manage.py runserver --settings feel.settings.local
 }
 
 function task_test () {

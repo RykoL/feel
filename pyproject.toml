@@ -11,10 +11,10 @@ dependencies = [
 
 [dependency-groups]
 dev = [
-    "django-pytest>=0.2.0",
     "pytest>=8.4.2",
+    "pytest-django>=4.11.1",
     "ruff>=0.13.3",
 ]
 
 [tool.pytest.ini_options]
-DJANGO_SETTINGS_MODULE = "feel.settings.test"
+DJANGO_SETTINGS_MODULE = "feel.settings.base"

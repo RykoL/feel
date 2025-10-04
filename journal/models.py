@@ -11,13 +11,14 @@ class JournalEntry(models.Model):
     journal = models.ForeignKey(Journal, on_delete=models.CASCADE)
 
 
-class Observation(models.Model):
-    class Feelings(models.TextChoices):
-        GOOD = "good"
-        NORMAL = "normal"
-        OK = "ok"
-        BAD = "bad"
+class Feelings(models.TextChoices):
+    GOOD = "good"
+    NORMAL = "normal"
+    OK = "ok"
+    BAD = "bad"
 
+
+class Observation(models.Model):
     feeling = models.TextField(choices=Feelings)
     journal_entry = models.ForeignKey(JournalEntry, on_delete=models.CASCADE)
 

@@ -79,7 +79,6 @@ WSGI_APPLICATION = "feel.wsgi.application"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 
-
 LOGIN_REDIRECT_URL = "/journal"
 
 AUTHENTICATION_BACKENDS = [

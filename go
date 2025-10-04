@@ -24,6 +24,7 @@ function task_lint() {
 }
 
 function task_precommit() {
+  set -e
   task_format
   task_lint
   task_test

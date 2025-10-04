@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 
 
 from .forms import NewJournalEntryForm
-from .models import Journal
+from .models import Journal, JournalEntry
 
 
 # Create your views here.
@@ -20,7 +20,10 @@ def new_entry(request):
     if request.method == "POST":
         form = NewJournalEntryForm(request.POST)
         if form.is_valid():
-            return redirect("journal_entry_feelings")
+            data = form.cleaned_data
+            entry = JournalEntry(journal_id=data["journal_id"])
+            entry.save()
+            return redirect("journal_entry_feelings", pk=entry.id)
 
     return render(request, "journal/entry/new_entry.html", context)
 

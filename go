@@ -19,6 +19,16 @@ function task_manage() {
   $UV_RUN ./manage.py $@
 }
 
+function task_lint() {
+  $UV_RUN ruff check
+}
+
+function task_precommit() {
+  task_format
+  task_lint
+  task_test
+}
+
 function help () {
     echo "Usage: ./go task_name"
     echo ""
@@ -27,6 +37,7 @@ function help () {
     echo "test - runs pytest against the application"
     echo "manage - simple wrapper around ./manage.py"
     echo "format - Format the project using ruff"
+    echo "precommit - runs pre-commit quality gates"
 }
 
 if [[ $# -lt 1 ]]; then

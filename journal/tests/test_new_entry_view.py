@@ -37,3 +37,32 @@ def test_creates_journal_entry_upon_successful_submission(client, journal):
     assert observation.feeling == "good"
     assert resp.status_code == 302
     assert resp.url == f"/journal/entry/{entry.id}/feelings"
+
+
+@pytest.mark.django_db
+def test_returns_404_if_journal_does_not_exist(client, journal):
+    client.login(username="test-user", password="my-pw")
+
+    data = {"journal_id": journal.id, "feeling": "good"}
+    resp = client.get("/journal/300/entry/new", data=data)
+
+    assert resp.status_code == 404
+
+
+@pytest.mark.django_db
+def test_returns_404_if_user_tries_to_access_journal_of_another_user(client, journal):
+    second_user = User.objects.create_user(username="second-user", password="other-pw")
+    journal = Journal.objects.create(author=second_user)
+
+    client.login(username="second-user", password="other-pw")
+
+    # Check if we can access the journal from the author user
+    resp = client.get(f"/journal/{journal.id}/entry/new")
+    assert resp.status_code == 200
+
+    # Log in as other user
+    client.login(username="test-user", password="my-pw")
+
+    resp = client.get(f"/journal/{journal.id}/entry/new")
+
+    assert resp.status_code == 404

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.db import transaction
 
 
@@ -14,7 +14,9 @@ def journal(request):
 
 
 def new_journal_entry(request, journal_id):
-    context = {"journal_id": journal_id}
+    journal = get_object_or_404(Journal, id=journal_id, author=request.user)
+
+    context = {"journal_id": journal.id}
 
     if request.method == "POST":
         form = NewJournalEntryForm(request.POST)

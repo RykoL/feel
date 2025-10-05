@@ -21,4 +21,4 @@ def test_new_journal_entry_form_fails_if_journal_id_is_missing():
     data = {"feeling": "good"}
     form = NewJournalEntryForm(data=data)
     assert not form.is_valid()
-    assert form.errors["journal_id"] == ["This field is required."]
+    assert form.errors["journal"] == ["This field is required."]

@@ -28,14 +28,15 @@ def test_creates_journal_for_user_if_it_doesnt_exist_yet(client, user):
 def test_creates_journal_entry_upon_successful_submission(client, journal):
     client.login(username="test-user", password="my-pw")
 
-    data = {"journal_id": journal.id, "feeling": "good"}
+    data = {"journal": journal.id, "feeling": "good"}
     resp = client.post(f"/journal/{journal.id}/entry/new", data=data)
+
+    assert resp.status_code == 302
 
     entry = JournalEntry.objects.get(journal_id=journal.id)
     observation = entry.observation_set.first()
 
     assert observation.feeling == "good"
-    assert resp.status_code == 302
     assert resp.url == f"/journal/entry/{entry.id}/feelings"
 
 

@@ -1,9 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.db import transaction
 
 
 from .forms import NewJournalEntryForm
-from .models import Journal, JournalEntry, Observation
+from .models import Journal
 
 
 # Create your views here.
@@ -20,17 +19,9 @@ def new_journal_entry(request, journal_id):
 
     if request.method == "POST":
         form = NewJournalEntryForm(request.POST)
+
         if form.is_valid():
-            data = form.cleaned_data
-            with transaction.atomic():
-                entry = JournalEntry.objects.create(journal_id=data["journal_id"])
-                entry.observation_set.set(
-                    [
-                        Observation.objects.create(
-                            feeling=data["feeling"], journal_entry=entry
-                        )
-                    ]
-                )
+            entry = form.save()
 
             return redirect("journal_entry_feelings", pk=entry.id)
 

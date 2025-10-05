@@ -4,16 +4,6 @@ from django.contrib.auth.models import User
 from ..models import Journal, JournalEntry
 
 
-@pytest.fixture
-def user() -> User:
-    return User.objects.create_user("test-user", password="my-pw")
-
-
-@pytest.fixture
-def journal(user) -> Journal:
-    return Journal.objects.create(author=user)
-
-
 @pytest.mark.django_db
 def test_creates_journal_for_user_if_it_doesnt_exist_yet(client, user):
     client.login(username="test-user", password="my-pw")
@@ -37,7 +27,7 @@ def test_creates_journal_entry_upon_successful_submission(client, journal):
     observation = entry.observation_set.first()
 
     assert observation.feeling == "good"
-    assert resp.url == f"/journal/entry/{entry.id}/feelings"
+    assert resp.url == f"/journal/{journal.id}/entry/{entry.id}/triggers"
 
 
 @pytest.mark.django_db

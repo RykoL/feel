@@ -1,4 +1,5 @@
 <h1>Hello {{username}}</h1>
+<a href="{% url 'new_entry' journal_id=journal_id  %}">New Entry</a>
 <ul>
   {% for entry in entries %}
   <li>{{entry.feeling}}</li>

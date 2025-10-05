@@ -1,7 +1,7 @@
 import pytest
 
 from django.contrib.auth.models import User
-from ..models import Journal
+from ..models import Journal, Observation, JournalEntry, Trigger
 
 
 @pytest.fixture
@@ -16,7 +16,19 @@ def authenticated_client(user, client):
 
 
 @pytest.fixture
-def journal(user) -> Journal:
+def empty_journal(user) -> Journal:
     journal = Journal.objects.create(author=user)
 
     return journal
+
+
+@pytest.fixture
+def journal(user, empty_journal):
+    trigger = Trigger(name="Family")
+    trigger.save()
+
+    entry = JournalEntry.objects.create(journal=empty_journal)
+    
+    observation = Observation.objects.create(feeling="good", journal_entry=entry)
+    observation.trigger_set.set([trigger])
+    observation.save()

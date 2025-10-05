@@ -9,7 +9,6 @@ from .models import Journal, Trigger
 logger = logging.getLogger(__name__)
 
 
-# Create your views here.
 def journal(request):
     journal, _ = Journal.objects.get_or_create(author=request.user)
     context = {

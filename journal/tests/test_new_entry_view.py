@@ -15,7 +15,8 @@ def test_creates_journal_for_user_if_it_doesnt_exist_yet(client, user):
 
 
 @pytest.mark.django_db
-def test_creates_journal_entry_upon_successful_submission(client, journal):
+def test_creates_journal_entry_upon_successful_submission(client, empty_journal):
+    journal = empty_journal
     client.login(username="test-user", password="my-pw")
 
     data = {"journal": journal.id, "feeling": "good"}
@@ -31,29 +32,30 @@ def test_creates_journal_entry_upon_successful_submission(client, journal):
 
 
 @pytest.mark.django_db
-def test_returns_404_if_journal_does_not_exist(client, journal):
+def test_returns_404_if_journal_does_not_exist(client, empty_journal):
     client.login(username="test-user", password="my-pw")
 
-    data = {"journal_id": journal.id, "feeling": "good"}
+    data = {"journal_id": empty_journal.id, "feeling": "good"}
     resp = client.get("/journal/300/entry/new", data=data)
 
     assert resp.status_code == 404
 
 
 @pytest.mark.django_db
-def test_returns_404_if_user_tries_to_access_journal_of_another_user(client, journal):
+def test_returns_404_if_user_tries_to_access_journal_of_another_user(client):
+    first_user = User.objects.create_user(username="first-user", password="my-pw")
     second_user = User.objects.create_user(username="second-user", password="other-pw")
-    journal = Journal.objects.create(author=second_user)
+    journal_of_second_user = Journal.objects.create(author=second_user)
 
     client.login(username="second-user", password="other-pw")
 
     # Check if we can access the journal from the author user
-    resp = client.get(f"/journal/{journal.id}/entry/new")
+    resp = client.get(f"/journal/{journal_of_second_user.id}/entry/new")
     assert resp.status_code == 200
-
+    client.logout()
     # Log in as other user
-    client.login(username="test-user", password="my-pw")
+    client.login(username="first-user", password="my-pw")
 
-    resp = client.get(f"/journal/{journal.id}/entry/new")
+    resp = client.get(f"/journal/{journal_of_second_user.id}/entry/new")
 
     assert resp.status_code == 404

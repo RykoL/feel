@@ -15,7 +15,7 @@
     <script src="//unpkg.com/alpinejs" defer></script>
     <link rel="stylesheet" href="{% static 'journal/css/main.css' %}">
   </head>
-  <body x-data="{ feeling: 'good'}">
+  <body>
       <header id="main-heading">
         <h1 class="heading heading-secondary    ">Great 🎉 !</h1>
       </header>
@@ -24,12 +24,12 @@
             <div class="text-container">
               <p class="text">What happened today that made you feel good ?</p>
             </div>
-            <form method="POST" action="/journal/save">
+            <form method="POST">
               {% csrf_token %}
               <div class="feeling-option-selection">
                 {% for trigger in triggers %}
                 <label class="pill checkbox">
-                  <input type="checkbox" name="" value="" />
+                  <input type="checkbox" name="trigger" value="{{trigger.id}}" />
                   {{trigger.name}}
                 </label>
                 {% endfor %}
@@ -37,7 +37,7 @@
               <button type="submit" class="btn btn-primary">Save</button>
             </form>
           </section>
-          <section class="feeling-section" x-show="feeling === 'normal'">
+          <!--<section class="feeling-section" x-show="feeling === 'normal'">
             <h2 class="heading-secondary">Perfectly normal day !</h2>
             <p>Some days are just normal, huhm ? What is missing to make this day an awesome day ?</p>
           </section>
@@ -48,7 +48,7 @@
           <section class="feeling-section" x-show="feeling === 'bad'">
             <h2 class="heading-secondary">It's alright !</h2>
             <p>Some days are just normal, huhm ? What is missing to make this day an awesome day ?</p>
-          </section>
+          </section>-->
       </main>
   </body>
 </html>

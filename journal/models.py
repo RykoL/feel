@@ -5,6 +5,9 @@ from django.contrib.auth import get_user_model
 class Journal(models.Model):
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
 
+    def __str__(self):
+        return f"Journal for {self.author.username}"
+
 
 class JournalEntry(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
@@ -18,11 +21,17 @@ class Feelings(models.TextChoices):
     BAD = "bad"
 
 
+class Trigger(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Observation(models.Model):
     feeling = models.TextField(choices=Feelings)
-    journal_entry = models.ForeignKey(JournalEntry, on_delete=models.CASCADE)
+    journal_entry = models.OneToOneField(
+        JournalEntry, on_delete=models.CASCADE, primary_key=True
+    )
 
-
-class Trigger(models.Model):
-    name = models.CharField(max_length=50)
-    observation = models.ManyToManyField(Observation)
+    triggers = models.ManyToManyField(Trigger, related_name="observations")

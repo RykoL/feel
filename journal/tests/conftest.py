@@ -24,11 +24,9 @@ def empty_journal(user) -> Journal:
 
 @pytest.fixture
 def journal(user, empty_journal):
-    trigger = Trigger(name="Family")
-    trigger.save()
-
+    Trigger.objects.create(name="Family")
+    Trigger.objects.create(name="Friends")
     entry = JournalEntry.objects.create(journal=empty_journal)
-    
-    observation = Observation.objects.create(feeling="good", journal_entry=entry)
-    observation.trigger_set.set([trigger])
-    observation.save()
+
+    Observation.objects.create(feeling="good", journal_entry=entry)
+    return empty_journal

@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 import logging
 
 from .forms import NewJournalEntryForm
-from .models import Journal, Trigger
+from .models import Journal, Trigger, JournalEntry
 
 
 logger = logging.getLogger(__name__)
@@ -31,7 +31,7 @@ def new_journal_entry(request, journal_id: int):
             entry = form.save()
 
             return redirect(
-                "journal_entry_triggers", pk=entry.id, journal_id=journal.id
+                "journal_entry_triggers", entry_id=entry.id, journal_id=journal.id
             )
         else:
             # Since the feeling currently is a set of fixed buttons and the journal_id
@@ -45,7 +45,18 @@ def new_journal_entry(request, journal_id: int):
     return render(request, "journal/entry/new_entry.html", context)
 
 
-def select_triggers(request, pk: int, journal_id: int):
+def select_triggers(request, journal_id: int, entry_id: int):
+    entry: JournalEntry = get_object_or_404(
+        JournalEntry, id=entry_id, journal=journal_id
+    )
+
     triggers = Trigger.objects.all()
     context = {"triggers": triggers}
+    if request.method == "POST":
+        for trigger in request.POST.getlist("trigger"):
+            entry.observation.triggers.add(trigger)
+
+        entry.save()
+        return redirect("journal")
+
     return render(request, "journal/entry/select_triggers.html", context)

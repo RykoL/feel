@@ -25,9 +25,8 @@ def test_creates_journal_entry_upon_successful_submission(client, empty_journal)
     assert resp.status_code == 302
 
     entry = JournalEntry.objects.get(journal_id=journal.id)
-    observation = entry.observation_set.first()
 
-    assert observation.feeling == "good"
+    assert entry.observation.feeling == "good"
     assert resp.url == f"/journal/{journal.id}/entry/{entry.id}/triggers"
 
 
@@ -43,7 +42,7 @@ def test_returns_404_if_journal_does_not_exist(client, empty_journal):
 
 @pytest.mark.django_db
 def test_returns_404_if_user_tries_to_access_journal_of_another_user(client):
-    first_user = User.objects.create_user(username="first-user", password="my-pw")
+    User.objects.create_user(username="first-user", password="my-pw")
     second_user = User.objects.create_user(username="second-user", password="other-pw")
     journal_of_second_user = Journal.objects.create(author=second_user)
 

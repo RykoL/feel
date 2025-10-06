@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
     "journal",
-    "public"
+    "public",
 ]
 
 MIDDLEWARE = [

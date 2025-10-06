@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>feel – Dein digitales Journal für mehr Achtsamkeit</title>
+    <meta name="description" content="feel ist dein persönlicher Raum für mehr Achtsamkeit. Verstehe deine Gefühle, erkenne Muster und gewinne Klarheit über dich selbst.">
+
+    <!-- Preload critical fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #72fa93;
+            --secondary-color: #f6c445;
+            --accent-1: #e45f2b;
+            --accent-2: #a0e548;
+            --accent-3: #9ac1f0;
+            --text-color: #000000;
+            --shadow-color: rgba(0, 0, 0, 0.25);
+            --bg-light: #fafafa;
+            --border-radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #ffffff;
+        }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text-color);
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #000;
+            font-size: 18px;
+        }
+
+        .logo h1 {
+            font-size: 24px;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav a:hover, .nav a:focus {
+            color: var(--primary-color);
+            outline: none;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 48px;
+        }
+
+        .btn:focus {
+            outline: 3px solid var(--primary-color);
+            outline-offset: 2px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: #000;
+            box-shadow: 0 4px 12px var(--shadow-color);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px var(--shadow-color);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--text-color);
+            border: 2px solid var(--text-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--text-color);
+            color: #fff;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 80px;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(114, 250, 147, 0.1), rgba(246, 196, 69, 0.1));
+        }
+
+        .hero h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-description {
+            font-size: 1.25rem;
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            color: rgba(0, 0, 0, 0.8);
+            line-height: 1.6;
+        }
+
+        /* Social Proof */
+        .social-proof {
+            padding: 80px 0;
+            background-color: var(--bg-light);
+        }
+
+        .social-proof h3 {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            font-weight: 600;
+        }
+
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .testimonial {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        /* Features */
+        .features {
+            padding: 80px 0;
+        }
+
+        .features h3 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            font-weight: 600;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #000;
+        }
+
+        .feature-icon.icon-1 {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-2));
+        }
+
+        .feature-icon.icon-2 {
+            background: linear-gradient(135deg, var(--secondary-color), var(--accent-1));
+        }
+
+        .feature-icon.icon-3 {
+            background: linear-gradient(135deg, var(--accent-3), var(--primary-color));
+        }
+
+        .feature h4 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .feature p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: rgba(0, 0, 0, 0.8);
+        }
+
+        /* Demo Section */
+        .demo {
+            padding: 80px 0;
+            background-color: var(--bg-light);
+            text-align: center;
+        }
+
+        .demo h3 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+
+        .demo-placeholder {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 3rem;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            border: 2px dashed var(--primary-color);
+        }
+
+        .demo-text {
+            font-size: 1.2rem;
+            color: rgba(0, 0, 0, 0.8);
+            margin-top: 1.5rem;
+        }
+
+        /* Target Audience */
+        .target-audience {
+            padding: 80px 0;
+        }
+
+        .target-audience h3 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            font-weight: 600;
+        }
+
+        .audience-list {
+            max-width: 800px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .audience-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .audience-icon {
+            width: 24px;
+            height: 24px;
+            background-color: var(--secondary-color);
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* FAQ */
+        .faq {
+            padding: 80px 0;
+            background-color: var(--bg-light);
+        }
+
+        .faq h3 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            font-weight: 600;
+        }
+
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            margin-bottom: 1rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .faq-question:hover, .faq-question:focus {
+            background-color: var(--bg-light);
+            outline: none;
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            color: rgba(0, 0, 0, 0.8);
+            line-height: 1.6;
+            display: none;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--text-color);
+            color: white;
+            padding: 3rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-section a:hover, .footer-section a:focus {
+            color: var(--primary-color);
+            outline: none;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                padding: 0.5rem 0;
+            }
+
+            .nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            }
+
+            .nav.mobile-open {
+                display: flex;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .cta-buttons {
+                gap: 0.5rem;
+            }
+
+            .btn {
+                padding: 10px 16px;
+                font-size: 14px;
+            }
+
+            .hero {
+                padding: 100px 0 60px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .testimonials {
+                grid-template-columns: 1fr;
+            }
+
+            .audience-list {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 0 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .hero-description {
+                font-size: 1.1rem;
+            }
+
+            .features h3,
+            .social-proof h3,
+            .demo h3,
+            .target-audience h3,
+            .faq h3 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header role="banner">
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo" aria-label="feel - Startseite">
+                    <div class="logo-icon" aria-hidden="true">f</div>
+                    <h1>feel</h1>
+                </a>
+
+                <nav class="nav" role="navigation" aria-label="Hauptnavigation">
+                    <a href="#features">Features</a>
+                    <a href="#why-feel">Warum feel?</a>
+                    <a href="#faq">FAQ</a>
+                </nav>
+
+                <div class="cta-buttons">
+                    <a href="{% url 'account_signup' %}" class="btn btn-primary" role="button">Jetzt starten</a>
+                    <a href="{% url 'account_login' %}" class="btn btn-secondary" role="button">Login</a>
+                </div>
+
+                <button class="mobile-menu-toggle" aria-label="Menü öffnen" aria-expanded="false">
+                    ☰
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" role="banner">
+        <div class="container">
+            <h2>Verstehe deine Gefühle.<br>Verändere deinen Alltag.</h2>
+            <p class="hero-description">
+                feel ist dein persönlicher Raum für mehr Achtsamkeit. Halte fest, was dich bewegt,
+                erkenne Muster und gewinne jeden Tag ein Stück mehr Klarheit über dich selbst.
+            </p>
+            <a href="{% url 'account_signup' %}" class="btn btn-primary" role="button">Jetzt kostenlos starten</a>
+        </div>
+    </section>
+
+    <!-- Social Proof -->
+    <section class="social-proof">
+        <div class="container">
+            <h3>Schon über 1.000 Menschen nutzen feel, um sich selbst besser zu verstehen.</h3>
+            <div class="testimonials">
+                <div class="testimonial">
+                    <p class="testimonial-text">
+                        "feel hilft mir, am Ende des Tages den Kopf freizubekommen und meine Gedanken zu sortieren."
+                    </p>
+                    <p class="testimonial-author">– Anna M.</p>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-text">
+                        "Ich habe durch die App endlich verstanden, was meinen Stress auslöst. Ein echter Game-Changer."
+                    </p>
+                    <p class="testimonial-author">– Lukas B.</p>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-text">
+                        "Endlich eine App, die mich nicht ablenkt, sondern mir hilft, bei mir anzukommen."
+                    </p>
+                    <p class="testimonial-author">– Sarah K.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features" id="features">
+        <div class="container">
+            <h3>Wie feel dir hilft</h3>
+            <div class="features-grid">
+                <div class="feature">
+                    <div class="feature-icon icon-1" aria-hidden="true">📊</div>
+                    <h4>Gefühle tracken & Trigger erkennen</h4>
+                    <p>
+                        Halte intuitiv fest, wie du dich fühlst und was der Auslöser war.
+                        So entdeckst du Muster und kannst bewusster auf Stress oder Freude reagieren.
+                    </p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon icon-2" aria-hidden="true">✨</div>
+                    <h4>Minimalistisches, ablenkungsfreies Design</h4>
+                    <p>
+                        Unsere Oberfläche ist bewusst einfach gehalten. Damit du dich ohne Ablenkung
+                        auf das Wesentliche konzentrieren kannst: auf dich.
+                    </p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon icon-3" aria-hidden="true">🔒</div>
+                    <h4>Absolute Privatsphäre & Sicherheit</h4>
+                    <p>
+                        Deine Einträge sind dein persönlicher Raum. Deshalb gehören deine Daten nur dir
+                        und werden niemals weitergegeben.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section class="demo">
+        <div class="container">
+            <h3>So einfach funktioniert's</h3>
+            <div class="demo-placeholder">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">🎬</div>
+                <p><strong>Hier wird eine kurze Demo eingefügt</strong></p>
+                <p style="font-size: 0.9rem; color: #666; margin-top: 1rem;">
+                    [Platzhalter für animierte GIF oder 15-Sekunden-Video des Eintrag-Erstellens]
+                </p>
+            </div>
+            <p class="demo-text">
+                Einfach, übersichtlich und in wenigen Sekunden erledigt. So wird Journaling zur Gewohnheit.
+            </p>
+        </div>
+    </section>
+
+    <!-- Target Audience -->
+    <section class="target-audience" id="why-feel">
+        <div class="container">
+            <h3>Dein Begleiter für mehr mentale Klarheit</h3>
+            <div class="audience-list">
+                <div class="audience-item">
+                    <div class="audience-icon" aria-hidden="true"></div>
+                    <p>Für alle, die ihre Gedanken sortieren und den Kopf freibekommen wollen.</p>
+                </div>
+                <div class="audience-item">
+                    <div class="audience-icon" aria-hidden="true"></div>
+                    <p>Für Menschen, die ihre Stressauslöser verstehen und besser damit umgehen möchten.</p>
+                </div>
+                <div class="audience-item">
+                    <div class="audience-icon" aria-hidden="true"></div>
+                    <p>Für Studierende, die Reflexion und Fokus in ihren Alltag integrieren wollen.</p>
+                </div>
+                <div class="audience-item">
+                    <div class="audience-icon" aria-hidden="true"></div>
+                    <p>Für jeden, der den Einstieg in Achtsamkeit und Journaling sucht.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <h3>Häufige Fragen</h3>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        Ist feel kostenlos?
+                        <span aria-hidden="true">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        Ja, die Kernfunktionen von feel sind und bleiben kostenlos. Wir planen für die Zukunft
+                        optionale Premium-Features, um das Projekt zu finanzieren.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        Sind meine Daten sicher?
+                        <span aria-hidden="true">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        Absolut. Deine Einträge werden vertraulich behandelt und sicher gespeichert.
+                        Wir geben nichts weiter.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        Brauche ich Vorkenntnisse?
+                        <span aria-hidden="true">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        Nein, feel ist für jeden intuitiv und einfach zu bedienen.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        Wer steckt hinter feel?
+                        <span aria-hidden="true">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        Wir sind ein kleines Team von Entwicklern und Designern aus Deutschland,
+                        die eine Leidenschaft für mentale Gesundheit und gute Software teilen.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        Kann ich meine Daten exportieren?
+                        <span aria-hidden="true">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        Diese Funktion ist für eine zukünftige Version geplant.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Kontakt</h4>
+                    <p><a href="mailto:kontakt@feel-app.de">kontakt@feel-app.de</a></p>
+                </div>
+                <div class="footer-section">
+                    <h4>Rechtliches</h4>
+                    <p><a href="#impressum">Impressum</a></p>
+                    <p><a href="#datenschutz">Datenschutz</a></p>
+                </div>
+                <div class="footer-section">
+                    <h4>Social Media</h4>
+                    <p><a href="#" aria-label="feel auf Twitter">Twitter</a></p>
+                    <p><a href="#" aria-label="feel auf Instagram">Instagram</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 feel. Alle Rechte vorbehalten.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Toggle Functionality
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const answer = button.nextElementSibling;
+                const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+                // Close all other FAQ items
+                document.querySelectorAll('.faq-question').forEach(otherButton => {
+                    if (otherButton !== button) {
+                        otherButton.setAttribute('aria-expanded', 'false');
+                        otherButton.querySelector('span').textContent = '+';
+                        otherButton.nextElementSibling.style.display = 'none';
+                    }
+                });
+
+                // Toggle current FAQ item
+                if (isExpanded) {
+                    button.setAttribute('aria-expanded', 'false');
+                    button.querySelector('span').textContent = '+';
+                    answer.style.display = 'none';
+                } else {
+                    button.setAttribute('aria-expanded', 'true');
+                    button.querySelector('span').textContent = '−';
+                    answer.style.display = 'block';
+                }
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Mobile menu toggle
+        const mobileToggle = document.querySelector('.mobile-menu-toggle');
+        const nav = document.querySelector('.nav');
+
+        mobileToggle.addEventListener('click', () => {
+            const isExpanded = mobileToggle.getAttribute('aria-expanded') === 'true';
+            mobileToggle.setAttribute('aria-expanded', !isExpanded);
+            nav.classList.toggle('mobile-open');
+            mobileToggle.textContent = isExpanded ? '☰' : '✕';
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('mobile-open');
+                mobileToggle.setAttribute('aria-expanded', 'false');
+                mobileToggle.textContent = '☰';
+            });
+        });
+    </script>
+</body>
+</html>

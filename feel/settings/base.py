@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
+    "django_cotton",
+    "components",
     "journal",
     "public",
 ]

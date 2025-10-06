@@ -1,0 +1,13 @@
+<c-vars
+  tag="h1"
+  variant="large"
+  :classes="{
+            'large': 'heading-1',
+            'medium': 'heading-2',
+            'small': 'heading-3'
+            }"
+/>
+
+<{{tag}} class="{{ classes|get_item:variant }} {{class}}">
+  {{slot}}
+</{{tag}}>

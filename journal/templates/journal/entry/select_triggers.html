@@ -17,7 +17,9 @@
   </head>
   <body>
       <header id="main-heading">
-        <h1 class="heading heading-secondary    ">Great 🎉 !</h1>
+        <c-heading class="heading-secondary">
+          Great 🎉 !
+        </c-heading>
       </header>
       <main class="grid-12 grip-gap">
           <section class="feeling-section" x-show="feeling === 'good'" id="feeling-good">
@@ -34,7 +36,7 @@
                 </label>
                 {% endfor %}
               </div>
-              <button type="submit" class="btn btn-primary">Save</button>
+              <c-button type="submit">Select triggers</c-button>
             </form>
           </section>
           <!--<section class="feeling-section" x-show="feeling === 'normal'">

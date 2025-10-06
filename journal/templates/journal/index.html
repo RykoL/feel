@@ -1,7 +1,32 @@
-<h1>Hello {{username}}</h1>
-<a href="{% url 'new_entry' journal_id=journal_id  %}">New Entry</a>
-<ul>
-  {% for entry in entries %}
-  <li>{{entry.feeling}}</li>
-  {% endfor %}
-</ul>
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <title>Feel - Your Journal</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="{%static 'js/htmx.min.js' %}" defer>
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <link rel="stylesheet" href="{% static 'journal/css/main.css' %}">
+  </head>
+  <body>
+      <header id="main-heading">
+        <c-heading class="heading-primary">{{user.first_name}}'s Journal</c-heading>
+      </header>
+      <main class="grid-12 grip-gap">
+        <a href="{% url 'new_entry' journal_id=journal_id  %}">New Entry</a>
+        <ul>
+          {% for entry in entries %}
+          <li>{{entry.feeling}}</li>
+          {% endfor %}
+        </ul>
+      </main>
+  </body>
+</html>

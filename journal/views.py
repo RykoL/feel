@@ -59,3 +59,7 @@ def select_triggers(request, journal_id: int, entry_id: int):
         return redirect("journal")
 
     return render(request, "journal/entry/select_triggers.html", context)
+
+
+def view_journal_entry(request):
+    return "hello"

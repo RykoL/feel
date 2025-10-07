@@ -22,11 +22,15 @@
       </header>
       <main class="grid-12 grip-gap">
         <a href="{% url 'new_entry' journal_id=journal_id  %}">New Entry</a>
-        <ul>
+        <section>
           {% for entry in entries %}
-          <li>{{entry.feeling}}</li>
+          <article>
+            <c-heading tag="h3" variant="small">{{entry.created_at}}</c-heading>
+            {{entry.observation.feeling}}
+            <a href="{% url 'view_journal_entry' journal_id=journal_id entry_id=entry.id %}">Open</a>
+          </article>
           {% endfor %}
-        </ul>
+        </section>
       </main>
   </body>
 </html>

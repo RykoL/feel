@@ -1,17 +1,22 @@
-/* --- Base Styles --- */
 :root {
+    /* Color Palette */
     --color-yellow: #f6c445;
     --color-red: #e45f2b;
     --color-green: #a0e548;
     --color-blue: #9ac1f0;
     --color-primary: #72fa93;
-
     --color-black: #000;
     --color-shadow: rgba(0, 0, 0, 0.25);
     --color-border: rgba(0, 0, 0, 0.25);
+    --color-text-primary: rgba(0, 0, 0, 0.8);
+    --color-text-secondary: rgba(0, 0, 0, 0.75);
+    --color-pill-bg: #c0c0c0;
+    --color-pill-text: #404040;
+    --color-background-page: #fcfcfc;
 
+
+    /* Typography */
     --font-family: Inter, sans-serif;
-
     --font-size-100: 0.64rem;
     --font-size-200: 0.8rem;
     --font-size-300: 1rem;
@@ -20,29 +25,51 @@
     --font-size-600: 1.953rem;
     --font-size-700: 2.441rem;
     --font-size-800: 3.052rem;
+    --font-weight-400: 400;
+    --font-weight-600: 600;
 
-    --weight-400: 400;
-    --weight-600: 600;
-
+    /* Semantic Font Sizes */
     --font-size-body: var(--font-size-300);
     --font-size-small: var(--font-size-200);
     --font-size-caption: var(--font-size-100);
-
     --font-size-h4: var(--font-size-400);
     --font-size-h3: var(--font-size-500);
     --font-size-h2: var(--font-size-600);
     --font-size-h1: var(--font-size-700);
     --font-size-display: var(--font-size-800);
+    --font-size-text: 1.125rem;
+    --font-size-heading-secondary: 4rem;
+    --font-size-mood-button: 3rem;
 
-    --font-weight-normal: var(--weight-400);
-    --font-weight-bold: var(--weight-600);
+    /* Semantic Font Weights */
+    --font-weight-normal: var(--font-weight-400);
+    --font-weight-bold: var(--font-weight-600);
 
+    /* Spacing */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 2rem;
+
+    /* Layout */
     --border-radius: 12px;
+    --border-radius-pill: 9999px;
+    --border-radius-mood: 1rem;
     --transition: all 0.3s ease;
+    --transition-mood: transform 0.25s;
+    --min-button-height: 3rem;
+
+    /* Shadows and Effects */
+    --shadow-light: 0 0.25rem 0.75rem var(--color-shadow);
+    --shadow-medium: 0.25rem 0.25rem 1rem var(--color-shadow);
+    --shadow-hover: 0 0.375rem 1.25rem var(--color-shadow);
+    --transform-hover: translateY(-0.125rem);
+    --transform-active: translateY(0.2rem);
+    --outline-focus: 0.188rem solid var(--color-primary);
+    --outline-offset: 2px;
 }
 
-
-
+/* --- Base Styles --- */
 html {
     scroll-behavior: smooth;
 }
@@ -50,24 +77,25 @@ html {
 body {
     font-family: var(--font-family);
     font-size: var(--font-size-body);
+    background-color: var(--color-background-page);
     margin: 0;
 }
 
-/* --- Layout --- */
+/* --- Layout Components --- */
 .grid-12 {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
 }
 
 .grid-gap {
-    row-gap: 2rem;
+    row-gap: var(--spacing-lg);
 }
 
 .mood-button-container {
     grid-column: 2 / 12;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: var(--spacing-lg);
 }
 
 .feeling-section {
@@ -78,14 +106,13 @@ body {
 }
 
 .feeling-option-selection {
-    margin: 1rem 0;
+    margin: var(--spacing-md) 0;
     display: flex;
-    gap: 1rem;
+    gap: var(--spacing-md);
     flex-wrap: wrap;
 }
 
-
-/* --- Components --- */
+/* --- Typography Components --- */
 .heading {
     margin: 0;
     font-family: var(--font-family);
@@ -105,26 +132,26 @@ body {
     font-size: var(--font-size-h3);
 }
 
-
 .heading-primary {
     text-align: center;
-    margin: 2rem 0;
+    margin: var(--spacing-lg) 0;
 }
 
 .heading-secondary {
     text-align: center;
-    font-size: 4rem;
-    margin: 1rem 0;
-    font-weight: 400;
-    color: rgba(0, 0, 0, 0.8)
+    font-size: var(--font-size-heading-secondary);
+    margin: var(--spacing-md) 0;
+    font-weight: var(--font-weight-normal);
+    color: var(--color-text-primary);
 }
 
 .text {
-    font-size: 1.125rem;
-    color: rgba(0, 0, 0, 0.75);
+    font-size: var(--font-size-text);
+    color: var(--color-text-secondary);
     margin: 0;
 }
 
+/* --- Form Components --- */
 .text-input {
     width: 100%;
     margin: 0 auto;
@@ -133,12 +160,10 @@ body {
 }
 
 .checkbox {
-    &:hover {
-        cursor: pointer;
-    }   
+    cursor: pointer;
 }
 
-.checkbox input{
+.checkbox input {
     display: none;
 }
 
@@ -146,16 +171,17 @@ body {
     background-color: var(--color-primary);
 }
 
+/* --- UI Components --- */
 .pill {
-    background: #c0c0c0;
-    color: #404040;
-    padding: .25rem .5rem;
-    border-radius: 9999px;
-    font-weight: 400;
+    background: var(--color-pill-bg);
+    color: var(--color-pill-text);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--border-radius-pill);
+    font-weight: var(--font-weight-normal);
 }
 
 .btn {
-    padding: 0.625rem 1rem;
+    padding: 0.625rem var(--spacing-md);
     border-radius: var(--border-radius);
     text-decoration: none;
     font-weight: var(--font-weight-normal);
@@ -166,60 +192,60 @@ body {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-height: 3rem;
+    min-height: var(--min-button-height);
+    cursor: pointer;
+}
 
-    &:focus {
-        outline: 0.188 solid var(--color-primary);
-        outline-offset: 2px;
-    }
-    
-    &:active {
-        translate: 0 .2rem;
-        background-color: color-mix(in oklab, var(--btn-bg-color), var(--color-black) 7%);
-    }
+.btn:focus {
+    outline: var(--outline-focus);
+    outline-offset: var(--outline-offset);
+}
 
-    &:hover {
-        cursor: pointer;
-        transform: translateY(-0.125rem);
-        box-shadow: 0 0.375rem 1.25rem var(--color-shadow);
-    }
+.btn:active {
+    transform: var(--transform-active);
+    background-color: color-mix(in oklab, var(--btn-bg-color), var(--color-black) 7%);
+}
 
+.btn:hover {
+    transform: var(--transform-hover);
+    box-shadow: var(--shadow-hover);
 }
 
 .btn-primary {
     --btn-bg-color: var(--color-primary);
-    box-shadow: 0 0.25rem 0.75rem var(--color-shadow);
+    box-shadow: var(--shadow-light);
 }
 
 .mood-button {
     display: block;
     border: 1px solid var(--color-border);
-    border-radius: 1rem;
-    padding: 2rem;
+    border-radius: var(--border-radius-mood);
+    padding: var(--spacing-lg);
     color: var(--color-black);
     text-decoration: none;
     text-align: center;
-    font-size: 3rem;
-    box-shadow: .25rem .25rem 1rem var(--color-shadow);
+    font-size: var(--font-size-mood-button);
+    box-shadow: var(--shadow-medium);
     align-content: center;
-    transition: transform .25s;
+    transition: var(--transition-mood);
     background-color: var(--btn-color);
+    cursor: pointer;
+}
 
-    &:active {
-        translate: 0 .2rem;
-        background-color: color-mix(in oklab, var(--btn-color), var(--color-black) 7%);
-    }
+.mood-button:active {
+    transform: var(--transform-active);
+    background-color: color-mix(in oklab, var(--btn-color), var(--color-black) 7%);
+}
 
-    &:hover {
-        background-color: color-mix(in oklab, var(--btn-color), var(--color-black) 7%);
-    }
+.mood-button:hover {
+    background-color: color-mix(in oklab, var(--btn-color), var(--color-black) 7%);
 }
 
 .mood-button-icon {
     display: block;
 }
 
-/* --- Modifier Classes --- */
+/* --- Color Variants --- */
 .mood-button-green {
     --btn-color: var(--color-green);
 }

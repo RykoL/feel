@@ -3,8 +3,11 @@
 {% block "title" %}Feel - Your Journal{% endblock %}
 {% block app_content %}
       <header class="flex flex-col justify-between items-center m-6 gap-6">
-        <c-heading>Hello {{user.first_name}}</c-heading>
+        <section class="flex w-full justify-end">
+          <c-menu></c-menu>
+        </section>
 
+        <c-heading>Hello {{user.first_name}}</c-heading>
         <a class="btn btn-primary" href="{% url 'new_entry' journal_id=journal_id  %}">Start Today's Journal</a>
       </header>
       <main class="flex gap-6 flex-col px-6">

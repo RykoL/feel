@@ -26,6 +26,7 @@ SECRET_KEY = "django-insecure-v96gm@=46o*%sud)(u6=9iq^pt&q*g!q23v8779)w$i-p=b(9c
 DEBUG = True
 
 ALLOWED_HOSTS = []
+TAILWIND_APP_NAME = 'theme'
 
 # Application definition
 
@@ -41,10 +42,16 @@ INSTALLED_APPS = [
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
     "django_cotton",
+    "tailwind",
+    "theme",
     "components",
     "journal",
     "public",
 ]
+
+if DEBUG:
+    # Add django_browser_reload only in DEBUG mode
+    INSTALLED_APPS += ['django_browser_reload']
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -57,6 +64,13 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "allauth.account.middleware.AccountMiddleware",
 ]
+
+if DEBUG:
+    # Add django_browser_reload middleware only in DEBUG mode
+    MIDDLEWARE += [
+        "django_browser_reload.middleware.BrowserReloadMiddleware",
+    ]
+
 
 ROOT_URLCONF = "feel.urls"
 

@@ -1,3 +1,11 @@
-<button class="btn btn-primary" {{attrs}}>
+<c-vars
+  variant="primary"
+  :classes="{
+            'primary': 'btn-primary',
+            'secondary': 'btn-secondary',
+            }"
+/>
+
+<button class="btn {{classes|get_item:variant}}" {{attrs}}>
   {{slot}}
 </button>

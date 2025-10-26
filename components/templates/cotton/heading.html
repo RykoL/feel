@@ -2,12 +2,12 @@
   tag="h1"
   variant="large"
   :classes="{
-            'large': 'heading-1',
-            'medium': 'heading-2',
-            'small': 'heading-3'
+            'large': 'text-2xl',
+            'medium': 'text-xl',
+            'small': 'text-lg'
             }"
 />
 
-<{{tag}} class="{{ classes|get_item:variant }} {{class}}">
+<{{tag}} class="{{ classes|get_item:variant }} font-semibold {{class}}">
   {{slot}}
 </{{tag}}>

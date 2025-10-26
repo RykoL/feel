@@ -1,0 +1,12 @@
+<c-vars
+  variant="good"
+  :classes="{
+            'good': 'bg-good',
+            'ok': 'bg-warning',
+            'normal': 'bg-blue',
+            'bad': 'bg-danger'
+            }"
+/>
+<span class="badge {{ classes|get_item:variant }}">
+  {{slot}}
+</span>

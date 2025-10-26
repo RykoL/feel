@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 def journal(request):
     journal, _ = Journal.objects.get_or_create(author=request.user)
     context = {
-        "entries": journal.journalentry_set.all(),
+        "entries": journal.journalentry_set.order_by("created_at"),
         "journal_id": journal.id,
     }
     return render(request, "journal/index.html", context)

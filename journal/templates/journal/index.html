@@ -1,36 +1,23 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
 {% load static %}
-<html lang="en">
-  <head>
-    <title>Feel - Your Journal</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+{% block "title" %}Feel - Your Journal{% endblock %}
+{% block "content" %}
+      <header class="flex flex-col justify-between items-center m-6 gap-6">
+        <c-heading>Hello {{user.first_name}}</c-heading>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <script src="{%static 'js/htmx.min.js' %}" defer>
-    <script src="//unpkg.com/alpinejs" defer></script>
-    <link rel="stylesheet" href="{% static 'journal/css/main.css' %}">
-  </head>
-  <body>
-      <header id="main-heading">
-        <c-heading class="heading-primary">{{user.first_name}}'s Journal</c-heading>
+        <a class="btn btn-primary" href="{% url 'new_entry' journal_id=journal_id  %}">Start Today's Journal</a>
       </header>
-      <main class="grid-12 grip-gap">
-        <a href="{% url 'new_entry' journal_id=journal_id  %}">New Entry</a>
-        <section>
+      <main class="flex gap-6 flex-col px-6">
           {% for entry in entries %}
-          <article>
-            <c-heading tag="h3" variant="small">{{entry.created_at}}</c-heading>
-            {{entry.observation.feeling}}
-            <a href="{% url 'view_journal_entry' journal_id=journal_id entry_id=entry.id %}">Open</a>
-          </article>
+          <c-card>
+            <div class="flex justify-between">
+              <c-heading tag="h3" variant="small">{{entry.created_at|date}}</c-heading>
+              <c-pill variant="{{entry.observation.feeling}}">{{entry.observation.feeling}}</c-pill>
+            </div>
+            <p class="text">
+              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+            </p>
+          </c-card>
           {% endfor %}
-        </section>
       </main>
-  </body>
-</html>
+{% endblock %}

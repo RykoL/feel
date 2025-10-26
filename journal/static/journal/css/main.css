@@ -13,7 +13,7 @@
     --color-pill-bg: #c0c0c0;
     --color-pill-text: #404040;
     --color-background-page: #fcfcfc;
-
+    --color-background-card: #ffffff;
 
     /* Typography */
     --font-family: Inter, sans-serif;
@@ -50,6 +50,7 @@
     --spacing-sm: 0.5rem;
     --spacing-md: 1rem;
     --spacing-lg: 2rem;
+    --spacing-xl: 4rem;
 
     /* Layout */
     --border-radius: 12px;
@@ -82,6 +83,14 @@ body {
 }
 
 /* --- Layout Components --- */
+#main-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: var(--spacing-lg) auto;
+    max-width: 83%;
+}
+
 .grid-12 {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
@@ -110,6 +119,19 @@ body {
     display: flex;
     gap: var(--spacing-md);
     flex-wrap: wrap;
+}
+
+.journal-entries-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+    grid-column: 2 / 12;
+}
+
+.journal-entries-card-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-md);
 }
 
 /* --- Typography Components --- */
@@ -172,6 +194,15 @@ body {
 }
 
 /* --- UI Components --- */
+.card {
+    background: var(--color-background-card);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+    display: inline-flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-light);
+}
+
 .pill {
     background: var(--color-pill-bg);
     color: var(--color-pill-text);
@@ -180,11 +211,15 @@ body {
     font-weight: var(--font-weight-normal);
 }
 
+.pill-good {
+    background: var(--color-green);
+}
+
 .btn {
     padding: 0.625rem var(--spacing-md);
     border-radius: var(--border-radius);
     text-decoration: none;
-    font-weight: var(--font-weight-normal);
+    font-weight: var(--font-weight-bold);
     transition: var(--transition);
     font-size: var(--font-size-body);
     background: var(--btn-bg-color);
@@ -206,14 +241,26 @@ body {
     background-color: color-mix(in oklab, var(--btn-bg-color), var(--color-black) 7%);
 }
 
-.btn:hover {
-    transform: var(--transform-hover);
-    box-shadow: var(--shadow-hover);
-}
-
 .btn-primary {
     --btn-bg-color: var(--color-primary);
+    color: var(--color-back);
     box-shadow: var(--shadow-light);
+
+    &:hover {
+        transform: var(--transform-hover);
+        box-shadow: var(--shadow-hover);
+    }
+}
+
+.btn-secondary {
+    color: var(--color-text-primary);
+    border: 2px solid var(--color-text-primary);
+    --btn-bg-color: transparent;
+
+    &:hover {
+        background-color: var(--color-text-primary);
+        color: #fff;
+    }
 }
 
 .mood-button {
